@@ -111,7 +111,12 @@ async function initializeModules(
     }
   }
 
+  let initializationDone = false;
   async function initializeModulesAfterLoad() {
+    if (initializationDone) {
+      return;
+    }
+    initializationDone = true;
     for (const module of modules) {
       try {
         if (module?.init) {
